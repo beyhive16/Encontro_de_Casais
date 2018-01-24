@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "EQUIPE")
 public class Equipe {
-	@DatabaseField(id = true, columnName = "ID", canBeNull = false, generatedId = true)
+	@DatabaseField(columnName = "ID", canBeNull = false, generatedId = true)
 	private Integer id;
 
 	@DatabaseField(columnName = "ANO", canBeNull = false)
@@ -16,11 +16,15 @@ public class Equipe {
 	@DatabaseField(columnName = "ID_TIPO_EQUIPE", canBeNull = false, foreign = true)
 	private TipoEquipe tipoEquipe;
 
-	@ForeignCollectionField(columnName = "ID_COORDENADORES", eager = true)
-	private ForeignCollection<Casal> coordenadores;
+	@DatabaseField(columnName = "ID_COORDENADORES", foreign = true)
+	private Casal coordenador;
 
-	@ForeignCollectionField(columnName = "ID_MEMBROS", eager = true)
+	@ForeignCollectionField(eager=true, columnName="ID_MEMBROS")
 	private ForeignCollection<Casal> membros;
+	
+	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "ID_ENCONTRO")
+	private Encontro encontro;
+	
 
 	public Integer getId() {
 		return id;
@@ -29,13 +33,13 @@ public class Equipe {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public ForeignCollection<Casal> getCoordenadores() {
-		return coordenadores;
+	
+	public Casal getCoordenador() {
+		return coordenador;
 	}
 
-	public void setCoordenadores(ForeignCollection<Casal> coordenadores) {
-		this.coordenadores = coordenadores;
+	public void setCoordenador(Casal coordenadores) {
+		this.coordenador = coordenadores;
 	}
 
 	public ForeignCollection<Casal> getMembros() {
@@ -60,6 +64,14 @@ public class Equipe {
 
 	public void setTipoEquipe(TipoEquipe tipoEquipe) {
 		this.tipoEquipe = tipoEquipe;
+	}
+
+	public Encontro getEncontro() {
+		return encontro;
+	}
+
+	public void setEncontro(Encontro encontro) {
+		this.encontro = encontro;
 	}
 
 }

@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "ENCONTRO")
 public class Encontro {
-	@DatabaseField(id = true, columnName = "ID", canBeNull = false, generatedId = true)
+	@DatabaseField(columnName = "ID", canBeNull = false, generatedId = true)
 	private Integer id;
 
 	@DatabaseField(columnName = "TEMA_ENCONTRO")
@@ -16,7 +16,7 @@ public class Encontro {
 	@DatabaseField(columnName = "ID_ORIENTADOR_ESPIRITUAL", canBeNull = false, foreign = true)
 	private Pessoa orientadorEspiritual;
 
-	@ForeignCollectionField(columnName = "ID_EQUIPE", eager = true)
+	@ForeignCollectionField(eager = true, columnName="ID_EQUIPE")
 	private ForeignCollection<Equipe> equipes;
 
 	public Integer getId() {
