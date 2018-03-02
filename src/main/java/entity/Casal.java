@@ -14,9 +14,15 @@ public class Casal {
 
 	@DatabaseField(columnName = "ID_ESPOSA", canBeNull = false, foreign = true)
 	private Pessoa esposa;
+	
+	@DatabaseField(columnName = "NM_CASAL", canBeNull = false)
+	private String nomeCasal;
+	
+	@DatabaseField(columnName = "EMAIL", canBeNull = false)
+	private String email;
 
-	@DatabaseField(columnName = "ID_ENDERECO", canBeNull = false, foreign = true)
-	private Endereco endereco;
+	@DatabaseField(columnName = "ENDERECO", canBeNull = false)
+	private String endereco;
 
 	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "ID_EQUIPE")
 	private Equipe equipe;
@@ -45,14 +51,6 @@ public class Casal {
 		this.esposa = esposa;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public Equipe getEquipe() {
 		return equipe;
 	}
@@ -61,4 +59,37 @@ public class Casal {
 		this.equipe = equipe;
 	}
 
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNomeCasal() {
+		return nomeCasal;
+	}
+
+	public void setNomeCasal(String nomeCasal) {
+		this.nomeCasal = nomeCasal;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String[] getCasal()
+	{
+		String[] casalString = new String[4];
+		casalString[0] = getNomeCasal();
+		casalString[1] = getEsposa().getNome();
+		casalString[2] = getMarido().getNome();
+		casalString[3] = getEsposa().getTelefone();
+		return casalString;	
+	}
 }

@@ -21,6 +21,13 @@ public class Pessoa {
 	@DatabaseField(columnName = "EMAIL", canBeNull=true)
 	private String email;
 
+	public Pessoa(){}
+	
+	public Pessoa(String id)
+	{
+		this.id = new Integer(id);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

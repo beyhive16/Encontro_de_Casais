@@ -12,6 +12,7 @@ import entity.Endereco;
 import entity.Equipe;
 import entity.Pessoa;
 import entity.TipoEquipe;
+import entity.Usuario;
 
 public class BaseDAO {
 	private final static String DATABASE_URL = "jdbc:sqlite:EncontroCasais.db";
@@ -38,5 +39,6 @@ public class BaseDAO {
 		TableUtils.createTableIfNotExists(connection, TipoEquipe.class);
 		TableUtils.createTableIfNotExists(connection, Equipe.class);
 		TableUtils.createTableIfNotExists(connection, Encontro.class);
+		TableUtils.createTableIfNotExists(connection, Usuario.class);
 	}
 }
