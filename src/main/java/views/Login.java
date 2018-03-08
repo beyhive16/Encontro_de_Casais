@@ -377,4 +377,21 @@ public class Login extends javax.swing.JFrame {
 			}
 		});
 	}
+	public static void main(String[] args)
+	{
+		try {
+			BaseDAO baseDAO = new BaseDAO();
+			baseDAO.createTables();
+			baseDAO.getConnection().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		
+		Login login = new Login();
+		login.start();
+	}
 }

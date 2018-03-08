@@ -32,13 +32,29 @@ public class BaseDAO {
 		this.connection = connection;
 	}
 
+	public void dropTables() throws SQLException
+	{
+		TableUtils.dropTable(connection, Pessoa.class, true);
+		TableUtils.dropTable(connection, Endereco.class, true);
+		TableUtils.dropTable(connection, Casal.class, true);
+		TableUtils.dropTable(connection, TipoEquipe.class, true);
+		TableUtils.dropTable(connection, Equipe.class, true);
+		TableUtils.dropTable(connection, Encontro.class, true);
+		TableUtils.dropTable(connection, Usuario.class, true);
+	}
+	
 	public void createTables() throws SQLException {
-		TableUtils.createTableIfNotExists(connection, Pessoa.class);
-		TableUtils.createTableIfNotExists(connection, Endereco.class);
-		TableUtils.createTableIfNotExists(connection, Casal.class);
-		TableUtils.createTableIfNotExists(connection, TipoEquipe.class);
-		TableUtils.createTableIfNotExists(connection, Equipe.class);
-		TableUtils.createTableIfNotExists(connection, Encontro.class);
-		TableUtils.createTableIfNotExists(connection, Usuario.class);
+		try {			
+			TableUtils.createTableIfNotExists(connection, Pessoa.class);
+			TableUtils.createTableIfNotExists(connection, Endereco.class);
+			TableUtils.createTableIfNotExists(connection, Casal.class);
+			TableUtils.createTableIfNotExists(connection, TipoEquipe.class);
+			TableUtils.createTableIfNotExists(connection, Equipe.class);
+			TableUtils.createTableIfNotExists(connection, Encontro.class);
+			TableUtils.createTableIfNotExists(connection, Usuario.class);
+		} catch (Exception e) {
+			this.dropTables();
+			this.createTables();
+		}
 	}
 }

@@ -5,7 +5,19 @@
  */
 package views;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
+
+import dao.BaseDAO;
+import dao.EncontroDAO;
+import dao.EncontroDAOImp;
+import dao.PessoaDAO;
+import dao.PessoaDAOImp;
+import entity.Encontro;
+import entity.Pessoa;
+import util.Datas;
 
 /**
  *
@@ -78,6 +90,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("PÁGINA INICIAL");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +126,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -189,21 +211,44 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        CadastroCasal obj = new CadastroCasal();
+        TelaSelecaoDestino obj = new TelaSelecaoDestino();
         obj.setVisible(true);
         obj.pack();
         obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-        tela4 obj = new tela4();
+        EdicoesPassadas obj = new EdicoesPassadas();
         obj.setVisible(true);
         obj.pack();
         obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        tela6 obj = new tela6();
+        Encontro encontro = new Encontro();
+        Pessoa padre = null;
+        //PARTE DE PRÉ CRIAÇÃO DO BANCO
+        try {
+			BaseDAO baseDAO = new BaseDAO();
+			PessoaDAO pessoaDAO = new PessoaDAOImp(baseDAO);
+			EncontroDAO encontroDAO = new EncontroDAOImp(baseDAO);
+			padre = pessoaDAO.buscarUltimoPadre();
+			encontro.setOrientadorEspiritual(padre);
+			encontro.setAno(Datas.anoAtual());
+			
+			encontroDAO.create(encontro);
+			
+			baseDAO.getConnection().close();
+			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+    	CadastrarEquipe obj = new CadastrarEquipe();
         obj.setVisible(true);
         obj.pack();
         obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -219,6 +264,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments
      */

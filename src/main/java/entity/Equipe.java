@@ -30,7 +30,7 @@ public class Equipe {
 	public Equipe(){}
 	public Equipe(String id)
 	{
-		this.id = new Integer(id);
+		this.id = Integer.parseInt(id);
 	}
 	
 	public Integer getId() {

@@ -20,6 +20,9 @@ public class Pessoa {
 	
 	@DatabaseField(columnName = "EMAIL", canBeNull=true)
 	private String email;
+	
+	@DatabaseField(columnName = "PADRE", canBeNull=true)
+	private Boolean padre = false;
 
 	public Pessoa(){}
 	
@@ -68,4 +71,13 @@ public class Pessoa {
 		this.email = email;
 	}
 
+	public Boolean getPadre() {
+		return padre;
+	}
+
+	public void setPadre(Boolean padre) {
+		this.padre = padre;
+	}
+
+	
 }

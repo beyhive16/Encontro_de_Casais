@@ -5,10 +5,23 @@
  */
 package views;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
+import dao.BaseDAO;
+import dao.CasalDAO;
+import dao.CasalDAOImp;
+import dao.EquipeDAO;
+import dao.EquipeDAOImp;
+import dao.TipoEquipeDAO;
+import dao.TipoEquipeDAOImp;
+import entity.Casal;
+import entity.Equipe;
+import entity.TipoEquipe;
 
 /**
  *
@@ -706,102 +719,119 @@ public class telaHistorico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_padreMouseClicked
 
     private void jTextField_casalADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_casalADMMouseClicked
-        telaEquipe(jTextField_casalADM);
+        telaEquipe("Coordenador Geral");
     }//GEN-LAST:event_jTextField_casalADMMouseClicked
 
     private void jTextField_apresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_apresMouseClicked
-        telaEquipe(jTextField_apres);
+        telaEquipe("Apresentador");
     }//GEN-LAST:event_jTextField_apresMouseClicked
 
     private void jTextField_cantoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_cantoMouseClicked
-        telaEquipe(jTextField_canto);
+        telaEquipe("Canto");
     }//GEN-LAST:event_jTextField_cantoMouseClicked
 
     private void jTextField_boaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_boaMouseClicked
-        telaEquipe(jTextField_boa);
+        telaEquipe("Boa Vontade");
     }//GEN-LAST:event_jTextField_boaMouseClicked
 
     private void jTextField_recepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_recepMouseClicked
-        telaEquipe(jTextField_recep);
+        telaEquipe("Recepçao Palestra");
     }//GEN-LAST:event_jTextField_recepMouseClicked
 
     private void jTextField_comprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_comprasMouseClicked
-        telaEquipe(jTextField_compras);
+        telaEquipe("Compras");
     }//GEN-LAST:event_jTextField_comprasMouseClicked
 
     private void jTextField_visitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_visitMouseClicked
-        telaEquipe(jTextField_visit);
+        telaEquipe("Visitaçao");
     }//GEN-LAST:event_jTextField_visitMouseClicked
 
     private void jTextField_circuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_circuloMouseClicked
-        telaEquipe(jTextField_circulo);
+        telaEquipe("Circulo Estudo");
     }//GEN-LAST:event_jTextField_circuloMouseClicked
 
     private void jTextField_liturgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_liturgiaMouseClicked
-        telaEquipe(jTextField_liturgia);
+        telaEquipe("Liturgia");
     }//GEN-LAST:event_jTextField_liturgiaMouseClicked
 
     private void jTextField_cafeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_cafeMouseClicked
-        telaEquipe(jTextField_cafe);
+        telaEquipe("MiniMercado & Cafe");
     }//GEN-LAST:event_jTextField_cafeMouseClicked
 
     private void jTextField_cozinhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_cozinhaMouseClicked
-        telaEquipe(jTextField_cozinha);
+        telaEquipe("Cozinha");
     }//GEN-LAST:event_jTextField_cozinhaMouseClicked
 
     private void jTextField_ordemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_ordemMouseClicked
-        telaEquipe(jTextField_ordem);
+        telaEquipe("Ordem & Limpeza");
     }//GEN-LAST:event_jTextField_ordemMouseClicked
 
     private void jTextField_vigiliaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_vigiliaMouseClicked
-        telaEquipe(jTextField_vigilia);
+        telaEquipe("Vigilia");
     }//GEN-LAST:event_jTextField_vigiliaMouseClicked
 
     private void jTextField_acolhidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_acolhidaMouseClicked
-        telaEquipe(jTextField_acolhida);
+        telaEquipe("Acolhida");
     }//GEN-LAST:event_jTextField_acolhidaMouseClicked
 
     private void jTextField_secretMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_secretMouseClicked
-        telaEquipe(jTextField_secret);
+        telaEquipe("Secretaria");
     }//GEN-LAST:event_jTextField_secretMouseClicked
 
     private void jTextField_financasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_financasMouseClicked
-        telaEquipe(jTextField_financas);
+        telaEquipe("Finanças");
     }//GEN-LAST:event_jTextField_financasMouseClicked
 
     private void jTextField_fichaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_fichaMouseClicked
-        telaEquipe(jTextField_ficha);
+        telaEquipe("Ficha");
     }//GEN-LAST:event_jTextField_fichaMouseClicked
 
     private void jTextField_posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_posMouseClicked
-        telaEquipe(jTextField_pos);
+        telaEquipe("Pos Encontro");
     }//GEN-LAST:event_jTextField_posMouseClicked
 
     private void jTextField_montagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_montagMouseClicked
-        telaEquipe(jTextField_montag);
+        telaEquipe("Montagem & Palestra");
     }//GEN-LAST:event_jTextField_montagMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void telaEquipe(JTextField campo){
+    public void telaEquipe(String campo){
         telaEquipe obj = new telaEquipe();
-        String apelido = campo.getText();
+        String ano = jTextField_ano.getText();
         DefaultTableModel model2 = (DefaultTableModel) obj.jTable1.getModel();
         if (model2.getRowCount() > 0) {
             for (int i = model2.getRowCount() - 1; i > -1; i--) {
                 model2.removeRow(i);
             }
         }
-        //busca no banco o correspondente pelo apelido naquele ano e quem é a equipe dele para preencher a tabela
-        Object[] linha = new Object[10];
-        for (int i=0;i<5;i++){
-            linha[0] = apelido;
-            linha[1] = "funcao";
-            model2.addRow(linha);
-        }
-        obj.setVisible(true);
+        BaseDAO baseDAO;
+		try {
+			baseDAO = new BaseDAO();
+			TipoEquipeDAO tipoEquipeDAO = new TipoEquipeDAOImp(baseDAO);
+			EquipeDAO equipeDAO = new EquipeDAOImp(baseDAO);
+			CasalDAO casalDAO = new CasalDAOImp(baseDAO);
+			
+			TipoEquipe tipoEquipe = tipoEquipeDAO.buscarPorNome(campo);
+			Equipe equipe = equipeDAO.selecionarPorTipoAno(tipoEquipe, Integer.parseInt(ano));
+			List<Casal> listaCasais = casalDAO.queryForEq("ID_EQUIPE", equipe.getId());
+			baseDAO.getConnection().close();
+			//busca no banco o correspondente pelo apelido naquele ano e quem é a equipe dele para preencher a tabela
+			Object[] linha = new Object[listaCasais.size()];
+			for (int i=0;i<listaCasais.size();i++){
+				linha[0] = listaCasais.get(i).getNomeCasal();
+				model2.addRow(linha);
+			}
+			obj.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         obj.pack();
         obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

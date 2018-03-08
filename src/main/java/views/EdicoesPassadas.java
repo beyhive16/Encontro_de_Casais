@@ -5,21 +5,43 @@
  */
 package views;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.table.TableModel;
+
+import dao.BaseDAO;
+import dao.EncontroDAO;
+import dao.EncontroDAOImp;
 
 /**
  *
  * @author raquelmelo
  */
-public class tela4 extends javax.swing.JFrame {
+public class EdicoesPassadas extends javax.swing.JFrame {
 
     /**
      * Creates new form Tela2
      */
-    public tela4() {
-        initComponents();
+	
+	BaseDAO baseDAO;
+	String[][] encontro;
+    public EdicoesPassadas() {
+        try {
+			baseDAO = new BaseDAO();
+			EncontroDAO encontroDAO = new EncontroDAOImp(baseDAO);
+			this.encontro = encontroDAO.buscarTodos();
+			baseDAO.getConnection().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	initComponents();
     }
 
     /**
@@ -68,12 +90,7 @@ public class tela4 extends javax.swing.JFrame {
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"2010", "PADRE1", "CASAL1"},
-                {"2011", "PADRE2", "CASAL2"},
-                {"2012", "PADRE3", "CASAL3"},
-                {"2013", "PADRE4", "CASAL4"}
-            },
+            this.encontro,
             new String [] {
                 "ANO DE REALIZAÇÃO", "DIRETOR ESPIRITUAL", "CASAL COORDENADOR"
             }
@@ -144,13 +161,13 @@ public class tela4 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tela4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicoesPassadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tela4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicoesPassadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tela4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicoesPassadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tela4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicoesPassadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -160,7 +177,7 @@ public class tela4 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tela4().setVisible(true);
+                new EdicoesPassadas().setVisible(true);
             }
         });
     }

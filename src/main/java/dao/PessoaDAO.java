@@ -10,4 +10,5 @@ public interface PessoaDAO extends Dao<Pessoa, Integer>
 {
 	public Pessoa buscarPorNome(String nome) throws SQLException;
 	public Pessoa buscarPorId(Integer id) throws SQLException;
+	public Pessoa buscarUltimoPadre() throws SQLException;
 }
