@@ -10,10 +10,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import dao.BaseDAO;
-import dao.CasalDAO;
-import dao.CasalDAOImp;
-import entidade.Casal;
+import Dao.BaseDAO;
+import Dao.CasalDAO;
+import Dao.CasalDAOImp;
+import Entidade.Casal;
+
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

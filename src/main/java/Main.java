@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.sql.SQLException;
 
-import dao.BaseDAO;
-import dao.UsuarioDAO;
-import dao.UsuarioDAOImp;
-import entidade.Usuario;
+import Dao.BaseDAO;
+import Dao.UsuarioDAO;
+import Dao.UsuarioDAOImp;
+import Entidade.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

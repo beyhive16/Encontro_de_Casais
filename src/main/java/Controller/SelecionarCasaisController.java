@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import dao.BaseDAO;
-import dao.CasalDAO;
-import dao.CasalDAOImp;
-import entidade.Casal;
+import Dao.BaseDAO;
+import Dao.CasalDAO;
+import Dao.CasalDAOImp;
+import Entidade.Casal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

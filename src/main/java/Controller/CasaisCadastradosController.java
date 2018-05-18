@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import entidade.Casal;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -13,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import dao.BaseDAO;
-import dao.CasalDAO;
-import dao.CasalDAOImp;
+import Dao.BaseDAO;
+import Dao.CasalDAO;
+import Dao.CasalDAOImp;
+import Entidade.Casal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

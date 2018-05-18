@@ -10,10 +10,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import dao.BaseDAO;
-import dao.OrientadorEspiritualDAO;
-import dao.OrientadorEspiritualDAOImp;
-import entidade.OrientadorEspiritual;
+import Dao.BaseDAO;
+import Dao.OrientadorEspiritualDAO;
+import Dao.OrientadorEspiritualDAOImp;
+import Entidade.OrientadorEspiritual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -79,7 +79,6 @@ public class CadastroPadreController implements Initializable {
 				OrientadorEspiritual orientadorEspiritual = new OrientadorEspiritual();
 				orientadorEspiritual.setNome(VARcampoNome);
 				orientadorEspiritual.setTelefone(VARcampoTelefone);
-				orientadorEspiritual.setEndereco(VARcampoEndereco);
 				orientadorEspiritual.setApelido("");
 
 				orientadorEspiritualDAO.create(orientadorEspiritual);

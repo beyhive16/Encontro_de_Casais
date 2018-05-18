@@ -17,10 +17,10 @@ import javax.imageio.ImageIO;
 import com.itextpdf.text.log.Level;
 import com.itextpdf.text.log.Logger;
 
-import dao.BaseDAO;
-import dao.UsuarioDAO;
-import dao.UsuarioDAOImp;
-import entidade.Usuario;
+import Dao.BaseDAO;
+import Dao.UsuarioDAO;
+import Dao.UsuarioDAOImp;
+import Entidade.Usuario;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
