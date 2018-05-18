@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="235.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SelecaoDestinoCadastroController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="#43b9d7" strokeType="INSIDE" width="597.0" />
+      <Label layoutX="86.0" layoutY="18.0" text="O QUE DESEJA CADASTRAR?">
+         <font>
+            <Font name="Gentium Basic Bold" size="37.0" />
+         </font>
+      </Label>
+      <Button fx:id="ButtonPadre" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" onAction="#goPadre" prefHeight="39.0" prefWidth="167.0" text="Orientador Espiritual">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="ButtonAdm" layoutX="408.0" layoutY="134.0" mnemonicParsing="false" onAction="#goAdm" prefHeight="39.0" prefWidth="167.0" text="Administrador">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="ButtonCasal" layoutX="216.0" layoutY="134.0" mnemonicParsing="false" onAction="#goCasal" prefHeight="39.0" prefWidth="167.0" text="Casal">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font></Button>
+         <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarMenu" text="VOLTAR">
+         <font>
+            <Font name="Gentium Basic Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

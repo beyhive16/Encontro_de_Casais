@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroCasaisController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="71.0" stroke="#4fb9d3" strokeType="INSIDE" width="438.0" />
+      <Label layoutX="71.0" layoutY="17.0" text="CADASTRO DE CASAIS">
+         <font>
+            <Font name="Gentium Basic Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="201.0" layoutY="106.0" text="Nome Dela:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="201.0" layoutY="174.0" text="Nome Dele:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="230.0" layoutY="241.0" text="Telefone Dele:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="241.0" text="Telefone Dela:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="308.0" text="Apelido do Casal:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="ButtonCadastrarCasais" layoutX="324.0" layoutY="387.0" mnemonicParsing="false" onAction="#goCadastrarCasais" text="Cadastrar">
+         <font>
+            <Font name="Gentium Basic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarMenu" text="VOLTAR">
+         <font>
+            <Font name="Gentium Basic Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="230.0" layoutY="308.0" text="CEP:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="366.0" text="Bairro:">
+         <font>
+            <Font name="Gentium Basic Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoNomeDela" layoutX="199.0" layoutY="123.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField fx:id="campoNomeDele" layoutX="199.0" layoutY="191.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField fx:id="campoTelefoneDela" layoutX="20.0" layoutY="262.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="campoTelefoneDele" layoutX="230.0" layoutY="262.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="campoApelido" layoutX="20.0" layoutY="333.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="campoCEP" layoutX="230.0" layoutY="333.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="campoBairro" layoutX="17.0" layoutY="391.0" prefHeight="25.0" prefWidth="181.0" />
+      <ImageView fx:id="campoImagem" fitHeight="107.0" fitWidth="113.0" layoutX="34.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Imagens/user.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="ButtonSelecionarImagem" layoutX="28.0" layoutY="203.0" mnemonicParsing="false" onAction="#goSelecionarImagem" text="Selecionar Foto" />
+   </children>
+</AnchorPane>

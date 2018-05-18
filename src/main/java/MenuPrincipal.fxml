@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="325.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuPrincipalController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" stroke="#38cff8" strokeType="INSIDE" width="623.0" />
+      <Label layoutX="127.0" layoutY="17.0" text="MENU PRINCIPAL">
+         <font>
+            <Font name="Gentium Basic Bold" size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="ButtonPagInicial" layoutX="14.0" layoutY="118.0" mnemonicParsing="false" onAction="#goPaginaInicial" prefHeight="44.0" prefWidth="185.0" text="Pagina Inicial">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonEncontro" layoutX="424.0" layoutY="118.0" mnemonicParsing="false" onAction="#goEncontro" prefHeight="44.0" prefWidth="185.0" text="Registrar Encontro">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonHistorico" layoutX="424.0" layoutY="197.0" mnemonicParsing="false" onAction="#goHistorico" prefHeight="44.0" prefWidth="185.0" text="Historico de Encontros">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonSair" layoutX="424.0" layoutY="264.0" mnemonicParsing="false" onAction="#goSair" prefHeight="44.0" prefWidth="185.0" text="Sair">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonCasais" layoutX="219.0" layoutY="197.0" mnemonicParsing="false" onAction="#goCasais" prefHeight="44.0" prefWidth="185.0" text="Casais Cadastrados">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonCadastro" layoutX="219.0" layoutY="118.0" mnemonicParsing="false" onAction="#goCadastros" prefHeight="44.0" prefWidth="185.0" text="Cadastros">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="ButtonHistoricoCasais" layoutX="14.0" layoutY="197.0" mnemonicParsing="false" onAction="#goHistoricoCasais" prefHeight="44.0" prefWidth="185.0" text="Historico dos Casais">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

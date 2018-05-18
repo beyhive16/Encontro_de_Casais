@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CasaisCadastradosController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="69.0" stroke="#2988d7" strokeType="INSIDE" width="600.0" />
+      <Label layoutX="106.0" layoutY="12.0" text="CASAIS CADASTRADOS">
+         <font>
+            <Font name="Gentium Basic Bold" size="39.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tabelaCasaisCadastrados" layoutY="69.0" prefHeight="331.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="apelido" prefWidth="143.0" text="APELIDO" />
+          <TableColumn fx:id="nomeDela" prefWidth="149.0" text="NOME DELA" />
+          <TableColumn fx:id="nomeDele" prefWidth="153.0" text="NOME DELE" />
+          <TableColumn fx:id="telefoneDele" prefWidth="154.0" text="TELEFONE" />
+        </columns>
+      </TableView>
+      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarMenu" text="VOLTAR">
+         <font>
+            <Font name="Gentium Basic Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

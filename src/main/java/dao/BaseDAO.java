@@ -6,19 +6,27 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import entity.Casal;
-import entity.Encontro;
-import entity.Endereco;
-import entity.Equipe;
-import entity.Pessoa;
-import entity.TipoEquipe;
-import entity.Usuario;
+import entidade.Casal;
+import entidade.Encontro;
+import entidade.Equipe;
+import entidade.HistoricoEquipe;
+import entidade.OrientadorEspiritual;
+import entidade.TipoEquipe;
+import entidade.Usuario;
+
 
 public class BaseDAO {
 	private final static String DATABASE_URL = "jdbc:sqlite:EncontroCasais.db";
 
 	private ConnectionSource connection;
 
+	
+	public static void main(String[] args) throws SQLException
+	{
+		BaseDAO baseDAO = new BaseDAO();
+		baseDAO.createTables();
+	}
+	
 	public BaseDAO() throws SQLException {
 		this.connection = new JdbcConnectionSource(DATABASE_URL);
 
@@ -34,27 +42,23 @@ public class BaseDAO {
 
 	public void dropTables() throws SQLException
 	{
-		TableUtils.dropTable(connection, Pessoa.class, true);
-		TableUtils.dropTable(connection, Endereco.class, true);
-		TableUtils.dropTable(connection, Casal.class, true);
-		TableUtils.dropTable(connection, TipoEquipe.class, true);
-		TableUtils.dropTable(connection, Equipe.class, true);
-		TableUtils.dropTable(connection, Encontro.class, true);
-		TableUtils.dropTable(connection, Usuario.class, true);
+		TableUtils.dropTable(getConnection(), Usuario.class, true);
+		TableUtils.dropTable(getConnection(),TipoEquipe.class,true);
+		TableUtils.dropTable(getConnection(), Casal.class,true);
+		TableUtils.dropTable(getConnection(), OrientadorEspiritual.class,true);
+		TableUtils.dropTable(getConnection(), Equipe.class,true);
+		TableUtils.dropTable(getConnection(), HistoricoEquipe.class,true);
+		TableUtils.dropTable(getConnection(), Encontro.class,true);
 	}
 	
-	public void createTables() throws SQLException {
-		try {			
-			TableUtils.createTableIfNotExists(connection, Pessoa.class);
-			TableUtils.createTableIfNotExists(connection, Endereco.class);
-			TableUtils.createTableIfNotExists(connection, Casal.class);
-			TableUtils.createTableIfNotExists(connection, TipoEquipe.class);
-			TableUtils.createTableIfNotExists(connection, Equipe.class);
-			TableUtils.createTableIfNotExists(connection, Encontro.class);
-			TableUtils.createTableIfNotExists(connection, Usuario.class);
-		} catch (Exception e) {
-			this.dropTables();
-			this.createTables();
-		}
+	public void createTables() throws SQLException 
+	{
+		TableUtils.createTableIfNotExists(getConnection(), Usuario.class);
+		TableUtils.createTableIfNotExists(getConnection(),TipoEquipe.class);
+		TableUtils.createTableIfNotExists(getConnection(), Casal.class);
+		TableUtils.createTableIfNotExists(getConnection(), OrientadorEspiritual.class);
+		TableUtils.createTableIfNotExists(getConnection(), Equipe.class);
+		TableUtils.createTableIfNotExists(getConnection(), HistoricoEquipe.class);
+		TableUtils.createTableIfNotExists(getConnection(), Encontro.class);
 	}
 }

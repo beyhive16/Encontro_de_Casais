@@ -3,66 +3,69 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.omg.CORBA.INTERNAL;
-
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-import entity.Encontro;
-import entity.Equipe;
-import entity.Pessoa;
+import entidade.Casal;
+import entidade.Encontro;
+import entidade.Equipe;
+import entidade.HistoricoEquipe;
+import entidade.OrientadorEspiritual;
+import entidade.TipoEquipe;
+import entidade.Usuario;
 
-public class EncontroDAOImp extends BaseDaoImpl<Encontro, Integer> implements EncontroDAO
-{
+public class EncontroDAOImp extends BaseDaoImpl<Encontro, Integer> implements EncontroDAO {
 
-	BaseDAO baseDAO;
-	
+	private BaseDAO baseDAO;
+
 	public EncontroDAOImp(BaseDAO baseDAO) throws SQLException {
-		super(baseDAO.getConnection(),Encontro.class);
+		super(baseDAO.getConnection(), Encontro.class);
 		this.baseDAO = baseDAO;
 	}
-	
-	@Override
-	public Encontro buscarUltimoEncontro() throws SQLException {
-		QueryBuilder<Encontro, Integer> qb = queryBuilder();
-		qb.orderBy("ID", false);
-		GenericRawResults<String[]> results = this.queryRaw(qb.prepareStatementString());
-		String[] values = results.getFirstResult();
-		System.out.println("ENCONTRO::::");
-		for(String temp:values)
-		{
-			System.out.println(temp);
-		}
-		Encontro encontro = new Encontro();
-		encontro.setId(Integer.parseInt(values[0]));
-		encontro.setTemaEncontro(values[1]);
-		Pessoa padre = new Pessoa();
-		padre.setId(Integer.parseInt(values[2]));
-		encontro.setOrientadorEspiritual(padre);
-		encontro.setAno(Integer.parseInt(values[4]));
-		return encontro;
+
+	public BaseDAO getBaseDAO() {
+		return baseDAO;
+	}
+
+	public void setBaseDAO(BaseDAO baseDAO) {
+		this.baseDAO = baseDAO;
 	}
 
 	@Override
-	public String[][] buscarTodos() throws SQLException {
-		GenericRawResults<String[]> qb = queryRaw("SELECT ENCONTRO.ANO, PESSOA.NOME_USUAL, CASAL.NM_CASAL "
-				+ "FROM ENCONTRO, PESSOA, CASAL "
-				+ "WHERE ENCONTRO.ID_ORIENTADOR_ESPIRITUAL= PESSOA.ID "
-				+ "AND ENCONTRO.ID_COORDENADOR = CASAL.ID;");
-		
-		List<String[]> results = qb.getResults();
-		String[][] resultados = new String[results.size()][];
-		for(int i=0;i<results.size();i++)
-		{
-			resultados[i] = results.get(i);
-			for(int j=0;j<resultados[i].length;j++)
+	public List<Encontro> getAll() throws SQLException {
+		return queryForAll();
+	}
+
+	@Override
+	public String[][] getAllWithCoordAndOri() throws SQLException {
+		List<Encontro> encontros = getAll();
+		String[][] temp = new String[encontros.size()][3];
+		HistoricoEquipeDAO historicoEquipeDAO = new HistoricoEquiDAOImp(baseDAO);
+		CasalDAO casalDAO = new CasalDAOImp(baseDAO);
+		EquipeDAO equipeDAO = new EquipeDAOImp(baseDAO);
+		TipoEquipeDAO tipoEquipeDAO = new TipoEquipeDAOImp(baseDAO);
+		TipoEquipe coordeanacao = tipoEquipeDAO.queryForId(1);
+		OrientadorEspiritualDAO orDAO = new OrientadorEspiritualDAOImp(baseDAO);
+		for (int i = 0; i < encontros.size(); i++) {
+			temp[i][0] = encontros.get(i).getAno().toString();
+			if(encontros.get(i).getOrientadorEspiritual()==null)
 			{
-				System.out.print(resultados[i][j]+";");
+				temp[i][1]=null;
+			}else
+			{
+				OrientadorEspiritual or = orDAO.queryForId(encontros.get(i).getOrientadorEspiritual().getId());
+				temp[i][1] = or.getNome();
 			}
-			System.out.println();
+			Equipe equipe = equipeDAO.getEquipeForTipoAno(coordeanacao, encontros.get(i).getAno());
+			Casal casal = historicoEquipeDAO.getCasalEquipeEncontro(equipe, encontros.get(i));
+			if (casal == null) {
+				temp[i][2] = null;
+			} else {
+				temp[i][2] = casal.getApelidoDoCasal();
+			}
 		}
-		return resultados;
+		return temp;
 	}
 
 }

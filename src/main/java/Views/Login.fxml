@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="396.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+   <children>
+      <Button fx:id="login" defaultButton="true" layoutX="21.0" layoutY="271.0" mnemonicParsing="false" onAction="#Entrar" prefHeight="25.0" prefWidth="318.0" text="Entrar">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="97.0" stroke="#3f91a1" strokeType="INSIDE" width="360.0" />
+      <Label layoutX="46.0" layoutY="28.0" text="LOGIN DE ACESSO" textAlignment="CENTER">
+         <font>
+            <Font name="Gentium Basic Bold" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="TWO_PASS_BOX" color="#388090" radius="9.24" width="17.96" />
+         </effect>
+      </Label>
+      <Label layoutX="68.0" layoutY="116.0" text="Entre com as suas credenciais">
+         <font>
+            <Font name="Gentium Basic Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="22.0" layoutY="169.0" text="Apelido:">
+         <font>
+            <Font name="Gentium Basic Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="220.0" text="Senha:">
+         <font>
+            <Font name="Gentium Basic Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoApelido" layoutX="114.0" layoutY="167.0" prefHeight="25.0" prefWidth="224.0" promptText="fieldApelido" />
+      <PasswordField fx:id="campoSenha" layoutX="114.0" layoutY="218.0" prefHeight="25.0" prefWidth="224.0" promptText="fieldSenha" />
+      <Button fx:id="sair" cancelButton="true" layoutX="21.0" layoutY="328.0" mnemonicParsing="false" onAction="#Sair" prefHeight="25.0" prefWidth="318.0" text="Sair">
+         <font>
+            <Font name="Gentium Basic Bold" size="16.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

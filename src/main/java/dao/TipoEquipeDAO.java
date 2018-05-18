@@ -5,11 +5,10 @@ import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 
-import entity.TipoEquipe;
+import entidade.TipoEquipe;
 
-public interface TipoEquipeDAO extends Dao<TipoEquipe, Integer>{
-	public TipoEquipe buscarPorNome(String nmTipo) throws SQLException;
-	public List<TipoEquipe> buscarTodos() throws SQLException;
-	public String[] buscarTodosTipoEquipe() throws SQLException;
-	public List<String[]> selecionarTudo() throws SQLException;
+public interface TipoEquipeDAO extends Dao<TipoEquipe, Integer>
+{
+	public List<TipoEquipe> getAll() throws SQLException;
+	public TipoEquipe getForName(String nome) throws SQLException;
 }

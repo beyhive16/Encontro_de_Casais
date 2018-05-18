@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DetalhesEncontroController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="#41aee1" strokeType="INSIDE" width="600.0" />
+      <Label layoutX="99.0" layoutY="12.0" text="DETALHES DO ENCONTRO">
+         <font>
+            <Font name="Gentium Basic Bold" size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="150.0" text="Orientador Espiritual:">
+         <font>
+            <Font name="Gentium Basic Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="254.0" layoutY="150.0" text="Ano:">
+         <font>
+            <Font name="Gentium Basic Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="87.0" text="Tema:">
+         <font>
+            <Font name="Gentium Basic Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="349.0" layoutY="150.0" text="Selecione a Equipe:">
+         <font>
+            <Font name="Gentium Basic Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoTema" editable="false" layoutX="15.0" layoutY="116.0" prefHeight="25.0" prefWidth="571.0" />
+      <TextField fx:id="campoPadre" editable="false" layoutX="15.0" layoutY="175.0" prefHeight="25.0" prefWidth="177.0" />
+      <TextField fx:id="campoAno" editable="false" layoutX="254.0" layoutY="175.0" prefHeight="25.0" prefWidth="53.0" />
+      <ChoiceBox fx:id="selectEquipe" layoutX="349.0" layoutY="175.0" prefHeight="25.0" prefWidth="236.0" />
+      <TableView fx:id="tabelaIntegrantes" editable="true" layoutX="15.0" layoutY="224.0" prefHeight="200.0" prefWidth="571.0">
+        <columns>
+          <TableColumn fx:id="apelido" prefWidth="200.0" text="APELIDO" />
+          <TableColumn fx:id="nomeDela" prefWidth="183.0" text="NOME DELA" />
+          <TableColumn fx:id="nomeDele" prefWidth="186.0" text="NOME DELE" />
+        </columns>
+      </TableView>
+      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarEncontro" text="VOLTAR">
+         <font>
+            <Font name="Gentium Basic Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
