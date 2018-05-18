@@ -1,48 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroCasaisController">
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroCasaisController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="71.0" stroke="#4fb9d3" strokeType="INSIDE" width="438.0" />
-      <Label layoutX="71.0" layoutY="17.0" text="CADASTRO DE CASAIS">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="71.0" stroke="#4fb9d3" strokeType="INSIDE" width="664.0" />
+      <Label layoutX="164.0" layoutY="18.0" text="CADASTRO DE CASAIS">
          <font>
             <Font name="Gentium Basic Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="201.0" layoutY="106.0" text="Nome Dela:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="201.0" layoutY="174.0" text="Nome Dele:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="230.0" layoutY="241.0" text="Telefone Dele:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="22.0" layoutY="241.0" text="Telefone Dela:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="20.0" layoutY="308.0" text="Apelido do Casal:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button fx:id="ButtonCadastrarCasais" layoutX="324.0" layoutY="387.0" mnemonicParsing="false" onAction="#goCadastrarCasais" text="Cadastrar">
+      <VBox layoutX="172.0" layoutY="82.0" prefHeight="147.0" prefWidth="454.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label style="-fx-padding: 10;" text="Apelido do Casal:">
+                     <font>
+                        <Font name="Gentium Basic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="campoApelido" prefHeight="25.0" prefWidth="174.0" />
+               </children>
+            </VBox>
+            <HBox prefHeight="72.0" prefWidth="470.0">
+               <children>
+                  <VBox style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Nome Dela:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoNomeDela" prefHeight="25.0" prefWidth="236.0" />
+                     </children>
+                  </VBox>
+                  <VBox style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Nome Dele:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoNomeDele" prefHeight="25.0" prefWidth="236.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox prefHeight="72.0" prefWidth="266.0" style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Telefone Dela:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoTelefoneDela" prefHeight="25.0" prefWidth="174.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="72.0" prefWidth="273.0" style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Telefone Dele:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoTelefoneDele" prefHeight="25.0" prefWidth="197.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="ButtonCadastrarCasais" layoutX="522.0" layoutY="532.0" mnemonicParsing="false" onAction="#goCadastrarCasais" text="Cadastrar">
          <font>
             <Font name="Gentium Basic Bold" size="18.0" />
          </font>
@@ -52,28 +91,87 @@
             <Font name="Gentium Basic Bold" size="12.0" />
          </font>
       </Button>
-      <Label layoutX="230.0" layoutY="308.0" text="CEP:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="17.0" layoutY="366.0" text="Bairro:">
-         <font>
-            <Font name="Gentium Basic Bold" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="campoNomeDela" layoutX="199.0" layoutY="123.0" prefHeight="25.0" prefWidth="236.0" />
-      <TextField fx:id="campoNomeDele" layoutX="199.0" layoutY="191.0" prefHeight="25.0" prefWidth="236.0" />
-      <TextField fx:id="campoTelefoneDela" layoutX="20.0" layoutY="262.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField fx:id="campoTelefoneDele" layoutX="230.0" layoutY="262.0" prefHeight="25.0" prefWidth="197.0" />
-      <TextField fx:id="campoApelido" layoutX="20.0" layoutY="333.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField fx:id="campoCEP" layoutX="230.0" layoutY="333.0" prefHeight="25.0" prefWidth="197.0" />
-      <TextField fx:id="campoBairro" layoutX="17.0" layoutY="391.0" prefHeight="25.0" prefWidth="181.0" />
-      <ImageView fx:id="campoImagem" fitHeight="107.0" fitWidth="113.0" layoutX="34.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Imagens/user.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="ButtonSelecionarImagem" layoutX="28.0" layoutY="203.0" mnemonicParsing="false" onAction="#goSelecionarImagem" text="Selecionar Foto" />
+      <VBox layoutX="35.0" layoutY="518.0" prefHeight="62.0" prefWidth="429.0">
+         <children>
+            <Label style="-fx-padding: 10;" text="CEP:">
+               <font>
+                  <Font name="Gentium Basic Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="campoCEP" prefHeight="25.0" prefWidth="197.0" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="91.0" prefHeight="206.0" prefWidth="157.0" style="-fx-alignment: center;">
+         <children>
+            <ImageView fx:id="campoImagem" fitHeight="160.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Imagens/user.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonSelecionarImagem" mnemonicParsing="false" onAction="#goSelecionarImagem" text="Selecionar Foto" />
+         </children>
+      </VBox>
+      <VBox layoutX="37.0" layoutY="297.0">
+         <children>
+            <HBox prefHeight="62.0" prefWidth="590.0">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="439.0" style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Rua:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoCEP2" prefHeight="25.0" prefWidth="197.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="62.0" prefWidth="146.0" style="-fx-padding: 5;">
+                     <children>
+                        <Label style="-fx-padding: 10;" text="Numero:">
+                           <font>
+                              <Font name="Gentium Basic Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="campoCEP21" prefHeight="25.0" prefWidth="197.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="62.0" prefWidth="590.0">
+               <children>
+                  <HBox prefHeight="72.0" prefWidth="590.0">
+                     <children>
+                        <VBox prefHeight="72.0" prefWidth="305.0" style="-fx-padding: 5;">
+                           <children>
+                              <Label style="-fx-padding: 10;" text="Bairro:">
+                                 <font>
+                                    <Font name="Gentium Basic Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="campoBairro" prefHeight="25.0" prefWidth="181.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="72.0" prefWidth="295.0" style="-fx-padding: 5;">
+                           <children>
+                              <Label style="-fx-padding: 10;" text="Cidade:">
+                                 <font>
+                                    <Font name="Gentium Basic Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="campoBairro1" prefHeight="25.0" prefWidth="181.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label style="-fx-padding: 10;" text="Complemento:">
+                     <font>
+                        <Font name="Gentium Basic Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="campoCEP1" prefHeight="25.0" prefWidth="197.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
