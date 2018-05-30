@@ -17,4 +17,6 @@ public interface HistoricoEquipeDAO extends Dao<HistoricoEquipe, Integer>{
 	public HistoricoEquipe getHistorico(Equipe equipe, Encontro encontro) throws SQLException;
 	public boolean deleteHistoricoCasal(Equipe equipe, Encontro encontro,Casal casal) throws SQLException;
 	public Casal getCasalEquipeEncontro(Equipe equipe, Encontro encontro) throws SQLException;
+	public List<HistoricoEquipe> getHistoricoPorApelido(String apelidoCasal) throws SQLException;
+	public List<HistoricoEquipe> getHistoricoPorApelidoAno(String apelidoCasal, String ano) throws SQLException;
 }

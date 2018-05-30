@@ -23,6 +23,14 @@ public class Encontro {
 	@ForeignCollectionField(eager = true, columnName="ID_HISTORICO_EQUIPE")
 	private ForeignCollection<HistoricoEquipe> historicoEquipe;
 
+	
+	public Encontro(){};
+	
+	public Encontro(Integer id)
+	{
+		setId(id);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

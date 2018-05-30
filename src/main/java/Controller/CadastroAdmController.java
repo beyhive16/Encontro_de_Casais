@@ -5,23 +5,15 @@
  */
 package Controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
-
-import com.itextpdf.text.log.Level;
-import com.itextpdf.text.log.Logger;
-
 import Dao.BaseDAO;
 import Dao.UsuarioDAO;
 import Dao.UsuarioDAOImp;
 import Entidade.Usuario;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,16 +24,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-/*
-import viacep.ViaCEP;
-import viacep.ViaCEPEvents;
-import viacep.ViaCEPException;
-*/
 import javafx.stage.Stage;
 
 
@@ -56,7 +40,7 @@ public class CadastroAdmController implements Initializable {
      * Initializes the controller class.
      */
 	@FXML
-        TextField campoApelido;
+    TextField campoApelido;
    
 	@FXML
 	TextField campoConfirmarSenha;
@@ -68,21 +52,15 @@ public class CadastroAdmController implements Initializable {
 	TextField campoTelefone;
     
 	@FXML
-	TextField campoNomeCompleto;
-        
-        @FXML
-        TextField campoBairro;
-        
-        @FXML
-        TextField campoCEP;
-        
-        @FXML
-        ImageView campoImagem;
-        
-        private Image imagem;
+	TextArea campoEndereco;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+   //     this.campoApelido = new TextField("");
+    //    this.campoConfirmarSenha = new TextField("");
+     //   this.campoSenha = new TextField("");
+      //  this.campoTelefone = new TextField("");
+       // this.campoEndereco = new TextField("");
     }
     
     public void goCadastrarAdm(ActionEvent event) throws IOException{
@@ -92,13 +70,9 @@ public class CadastroAdmController implements Initializable {
         String VARcampoConfirmarSenha = campoConfirmarSenha.getText();
         String VARcampoSenha = campoSenha.getText();
         String VARcampoTelefone = campoTelefone.getText();
-        String VARcampoNomeCompleto = campoNomeCompleto.getText();
-        String VARcampoBairro = campoBairro.getText();
-        String VARcampoCEP = campoCEP.getText();
-       
+        String VARcampoEndereco = campoEndereco.getText();
         
-        
-        if(VARcampoApelido.isEmpty()|VARcampoNomeCompleto.isEmpty()|VARcampoBairro.isEmpty()|VARcampoCEP.isEmpty()|VARcampoTelefone.isEmpty()|VARcampoSenha.isEmpty()|VARcampoConfirmarSenha.isEmpty())
+        if(VARcampoApelido.isEmpty()|VARcampoEndereco.isEmpty()|VARcampoTelefone.isEmpty()|VARcampoSenha.isEmpty()|VARcampoConfirmarSenha.isEmpty())
         {
         	Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Preencha todos os dados!");
@@ -131,10 +105,7 @@ public class CadastroAdmController implements Initializable {
         		user.setNome("");
         		user.setSenha(VARcampoSenha);
         		user.setTelefone(VARcampoTelefone);
-        		/*user.setEndereco(VARcampoEndereco); ESSA LINHA VAI MORRER PQ NAO EXISTE MAIS ESSE CAMPO
-                        AS SEGUINTES LINHAS SAO ADICIONADAS E VOCE TEM QUE CRIAR OS CAMPOS PRA ELAS NO BANCO
-                        user.setBairro(VARcampoBairro);
-                        user.setCEP(VARcampoCEP);*/
+        		//user.setEndereco(VARcampoEndereco);
         		userDAO.create(user);
         		baseDAO.getConnection().close();
         	} catch (SQLException e) {
@@ -160,17 +131,4 @@ public class CadastroAdmController implements Initializable {
         stage.show();
     }
     
-    public void goEscolherImagem(ActionEvent event) throws IOException{
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-        new ExtensionFilter("Image Files","*.png","*.jpg","*.jpeg"));
-        File file = fileChooser.showOpenDialog(null);
-        if (file!=null){
-            Image image = new Image(file.toURI().toString());
-            campoImagem.setImage(image);
-        }
-    }
-    public void goBuscarCEP() throws IOException{
-        //ViaCEP viaCep = new ViaCEP();
-    }
 }

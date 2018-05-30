@@ -1,6 +1,7 @@
 package Dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
@@ -10,10 +11,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import Entidade.Casal;
 import Entidade.Encontro;
 import Entidade.Equipe;
-import Entidade.HistoricoEquipe;
 import Entidade.OrientadorEspiritual;
 import Entidade.TipoEquipe;
-import Entidade.Usuario;
 
 public class EncontroDAOImp extends BaseDaoImpl<Encontro, Integer> implements EncontroDAO {
 
@@ -34,7 +33,20 @@ public class EncontroDAOImp extends BaseDaoImpl<Encontro, Integer> implements En
 
 	@Override
 	public List<Encontro> getAll() throws SQLException {
-		return queryForAll();
+		List<Encontro> encontros = queryForAll();
+		OrientadorEspiritualDAO orientadorEspiritualDAO = new OrientadorEspiritualDAOImp(baseDAO);
+		OrientadorEspiritual orientador =null;
+		for (Encontro encontro : encontros) {
+			if(encontro.getOrientadorEspiritual()!=null)
+			{				
+				orientador = orientadorEspiritualDAO.queryForId(encontro.getOrientadorEspiritual().getId());
+			}
+			if(orientador!=null)
+			{				
+				encontro.setOrientadorEspiritual(orientador);
+			}
+		}
+		return encontros;
 	}
 
 	@Override
@@ -66,6 +78,19 @@ public class EncontroDAOImp extends BaseDaoImpl<Encontro, Integer> implements En
 			}
 		}
 		return temp;
+	}
+
+	@Override
+	public List<String> getAnos() throws SQLException {
+		List<String> anos = new ArrayList<>();
+		QueryBuilder<Encontro, Integer> qb = queryBuilder();
+		qb.distinct().selectColumns("ANO");
+		GenericRawResults<String[]> results = this.queryRaw(qb.prepareStatementString());
+		String[] values = results.getFirstResult();
+		for (String string : values) {
+			anos.add(string);
+		}
+		return anos;
 	}
 
 }

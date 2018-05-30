@@ -15,7 +15,12 @@ import java.util.ResourceBundle;
 import Dao.BaseDAO;
 import Dao.CasalDAO;
 import Dao.CasalDAOImp;
+import Dao.HistoricoEquiDAOImp;
+import Dao.HistoricoEquipeDAO;
 import Entidade.Casal;
+import Entidade.Encontro;
+import Entidade.Equipe;
+import Entidade.HistoricoEquipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,11 +29,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -61,6 +67,9 @@ public class SelecionarCasaisController implements Initializable {
     @FXML
     private TableColumn<Casal, String> apelido;
     
+    private Encontro encontro;
+    private Equipe equipe;
+    
     @SuppressWarnings("restriction")
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,7 +95,14 @@ public class SelecionarCasaisController implements Initializable {
 			}	
 		});
         
-    }    
+    }
+    
+    public void init(Encontro encontro, Equipe equipe)
+    {
+    	this.encontro = encontro;
+    	this.equipe = equipe;
+    }
+    
     private ObservableList<Casal> CasaisSelecionados() {
         
     	BaseDAO baseDAO;
@@ -107,8 +123,26 @@ public class SelecionarCasaisController implements Initializable {
         ObservableList<Casal> var = tabelaIntegrantes.getItems();
         for(Casal c : var) {
         	if(c.getSelected()) {
-        		System.out.println(c.getApelidoDoCasal());
-        		//vai pegar o casal C que voltou, trazer ele pra tela anterior e adicionar à equipe atual
+        		HistoricoEquipe historicoEquipe = new HistoricoEquipe();
+        		historicoEquipe.setCasal(c);
+        		historicoEquipe.setEncontro(encontro);
+        		historicoEquipe.setEquipe(equipe);
+        		
+        		try {
+					BaseDAO baseDAO = new BaseDAO();
+					HistoricoEquipeDAO historicoEquipeDAO = new HistoricoEquiDAOImp(baseDAO);
+					historicoEquipeDAO.create(historicoEquipe);
+					baseDAO.getConnection().close();
+        		} catch (SQLException | IOException e) {
+        			Alert alert = new Alert(AlertType.ERROR);
+        			alert.setTitle("Ocorreu um erro ao consultar o banco!");
+        			alert.setHeaderText(e.getMessage());
+        			alert.showAndWait().ifPresent(rs -> {
+        				if (rs == ButtonType.OK) {
+        					System.out.println("Pressed OK.");
+        				}
+        			});
+        		}
         	}
         }
         for (Casal c: tabelaIntegrantes.getSelectionModel().getSelectedItems()) {
@@ -119,10 +153,12 @@ public class SelecionarCasaisController implements Initializable {
     
     public void retornarRegistro(ActionEvent event) throws IOException{
         System.out.println("Retornando ao Menu Principal");
-        Parent next = FXMLLoader.load(getClass().getResource("/Views/RegistrarEncontro.fxml"));
-        Scene scene = new Scene(next);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/RegistrarEncontro.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        
+        stage.setScene(new Scene(fxmlLoader.load()));
+        RegistrarEncontroController registrarEncontroController = fxmlLoader.<RegistrarEncontroController>getController();
+        registrarEncontroController.fromSelecao(encontro, equipe);
         stage.show();
     }
 
@@ -136,4 +172,18 @@ public class SelecionarCasaisController implements Initializable {
 	public void ConfiguraObjetoParaSCC(Casal obj) {
 		setObjeto2(obj);
 	}
+	public Encontro getEncontro() {
+		return encontro;
+	}
+	public void setEncontro(Encontro encontro) {
+		this.encontro = encontro;
+	}
+	public Equipe getEquipe() {
+		return equipe;
+	}
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+	
+	
 }

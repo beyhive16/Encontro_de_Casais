@@ -12,7 +12,7 @@ import Entidade.Casal;
 import Entidade.Encontro;
 import Entidade.Equipe;
 import Entidade.HistoricoEquipe;
-import Entidade.Usuario;
+import Entidade.TipoEquipe;
 
 public class HistoricoEquiDAOImp extends BaseDaoImpl<HistoricoEquipe, Integer> implements HistoricoEquipeDAO {
 
@@ -115,6 +115,77 @@ public class HistoricoEquiDAOImp extends BaseDaoImpl<HistoricoEquipe, Integer> i
 			return null;
 		}
 		return casalDAO.queryForId(Integer.parseInt(values[0]));
+	}
+
+	@Override
+	public List<HistoricoEquipe> getHistoricoPorApelido(String apelidoCasal) throws SQLException {
+		//BUSCA DO CASAL
+		CasalDAO casal = new CasalDAOImp(baseDAO);
+		Casal casalSelecionado = casal.queryForEq("APELIDO_DO_CASAL", apelidoCasal).get(0);
+		
+		//BUSCA DO HISTORICO
+		QueryBuilder<HistoricoEquipe, Integer> qb = queryBuilder();
+		qb.where().eq("ID_CASAL", casalSelecionado.getId());
+		GenericRawResults<String[]> results = queryRaw(qb.prepareStatementString());
+		
+		//POPULAÇÃO DE OBJETOS DA LISTA
+		List<String[]> resultadosHistorico = results.getResults();
+		List<HistoricoEquipe> resultadoEquipe = new ArrayList<>();
+		List<HistoricoEquipe> resultadoEquipe2 = new ArrayList<>();
+		for (String[] temps : resultadosHistorico) {
+			HistoricoEquipe hist = new HistoricoEquipe(temps);
+			resultadoEquipe.add(hist);
+		}
+		//BUSCA DOS COMPONENTES DA LISTA
+		for (HistoricoEquipe historicoEquipe : resultadoEquipe) {
+			EquipeDAO equipeDAO = new EquipeDAOImp(baseDAO);
+			Equipe equipe = equipeDAO.queryForId(historicoEquipe.getEquipe().getId());
+			
+			TipoEquipeDAO tipoEquipeDAO = new TipoEquipeDAOImp(baseDAO);
+			TipoEquipe tipoEquipe = tipoEquipeDAO.queryForId(equipe.getTipoEquipe().getId());
+			equipe.setTipoEquipe(tipoEquipe);
+			
+			EncontroDAO encontroDAO = new EncontroDAOImp(baseDAO);
+			Encontro encontro = encontroDAO.queryForId(historicoEquipe.getEncontro().getId());
+			
+			historicoEquipe.setEquipe(equipe);
+			historicoEquipe.setCasal(casalSelecionado);
+			historicoEquipe.setEncontro(encontro);
+			resultadoEquipe2.add(historicoEquipe);
+		}
+		
+		return resultadoEquipe2;
+	}
+
+	@Override
+	public List<HistoricoEquipe> getHistoricoPorApelidoAno(String apelidoCasal, String ano) throws SQLException {
+		CasalDAO casal = new CasalDAOImp(baseDAO);
+		Casal casalSelecionado = casal.queryForEq("APELIDO_DO_CASAL", apelidoCasal).get(0);
+		
+		EncontroDAO encontroDAO = new EncontroDAOImp(baseDAO);
+		Encontro encontro = encontroDAO.queryForEq("ANO", Integer.parseInt(ano)).get(0);
+		
+		QueryBuilder<HistoricoEquipe, Integer> qb = queryBuilder();
+		qb.where().eq("ID_CASAL", casalSelecionado.getId()).and().eq("ID_ENCONTRO", encontro.getId());
+		GenericRawResults<String[]> results = queryRaw(qb.prepareStatementString());
+		List<String[]> result = results.getResults();
+		List<HistoricoEquipe> historicoEquipes = new ArrayList<>();
+		
+		for (String[] strings : result) {
+			HistoricoEquipe historicoEquipe = new HistoricoEquipe(strings);
+			
+			EquipeDAO equipeDAO = new EquipeDAOImp(baseDAO);
+			Equipe equipe = equipeDAO.queryForId(historicoEquipe.getEquipe().getId());
+			
+			TipoEquipeDAO tipoEquipeDAO = new TipoEquipeDAOImp(baseDAO);
+			TipoEquipe tipoEquipe = tipoEquipeDAO.queryForId(equipe.getTipoEquipe().getId());
+			equipe.setTipoEquipe(tipoEquipe);
+			
+			historicoEquipe.setEquipe(equipe);
+			
+			historicoEquipes.add(historicoEquipe);
+		}
+		return historicoEquipes;
 	}
 
 }

@@ -11,4 +11,5 @@ public interface TipoEquipeDAO extends Dao<TipoEquipe, Integer>
 {
 	public List<TipoEquipe> getAll() throws SQLException;
 	public TipoEquipe getForName(String nome) throws SQLException;
+	public List<String> getAllTipoEquipe() throws SQLException;
 }

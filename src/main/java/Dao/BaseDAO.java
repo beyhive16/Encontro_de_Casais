@@ -8,7 +8,6 @@ import com.j256.ormlite.table.TableUtils;
 
 import Entidade.Casal;
 import Entidade.Encontro;
-import Entidade.Endereco;
 import Entidade.Equipe;
 import Entidade.HistoricoEquipe;
 import Entidade.OrientadorEspiritual;
@@ -43,7 +42,6 @@ public class BaseDAO {
 
 	public void dropTables() throws SQLException
 	{
-		TableUtils.dropTable(getConnection(), Endereco.class, true);
 		TableUtils.dropTable(getConnection(), Usuario.class, true);
 		TableUtils.dropTable(getConnection(),TipoEquipe.class,true);
 		TableUtils.dropTable(getConnection(), Casal.class,true);
@@ -55,7 +53,6 @@ public class BaseDAO {
 	
 	public void createTables() throws SQLException 
 	{
-		TableUtils.createTableIfNotExists(getConnection(), Endereco.class);
 		TableUtils.createTableIfNotExists(getConnection(), Usuario.class);
 		TableUtils.createTableIfNotExists(getConnection(),TipoEquipe.class);
 		TableUtils.createTableIfNotExists(getConnection(), Casal.class);

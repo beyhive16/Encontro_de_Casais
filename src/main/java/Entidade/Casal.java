@@ -41,6 +41,19 @@ public class Casal
 		this.selected = false;
 	}
 	
+	public Casal(Integer id)
+	{
+		this.selected = false;
+		setId(id);
+	}
+	
+	public Casal(String[] casal)
+	{
+		this.selected = false;
+		setId(new Integer(casal[0]));
+		
+	}
+	
 	public Casal(String nomeDela, String nomeDele, String apelido, String telefone) {
 		this.selected = false;
 		this.nomeDela = nomeDela;

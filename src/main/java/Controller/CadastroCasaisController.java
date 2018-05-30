@@ -14,25 +14,19 @@ import Dao.BaseDAO;
 import Dao.CasalDAO;
 import Dao.CasalDAOImp;
 import Entidade.Casal;
-
-import java.io.File;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -60,17 +54,22 @@ public class CadastroCasaisController implements Initializable {
 	@FXML
 	TextField campoNomeDele;
 
-        @FXML
-	TextField campoBairro;
-        
-        @FXML
-	TextField campoCEP;
-        
-        @FXML
-        ImageView campoImagem;
-        
-        private Image imagem;
-        
+	@FXML
+	TextArea campoEndereco;
+
+	private Casal casal;
+	
+	public void init(Casal casal)
+	{
+		this.casal = casal;
+		this.campoApelido.setText(this.casal.getApelidoDoCasal());
+		this.campoNomeDela.setText(this.casal.getNomeDela());
+		this.campoNomeDele.setText(this.casal.getNomeDele());
+		this.campoTelefoneDela.setText(this.casal.getTelefoneDela());
+		this.campoTelefoneDele.setText(this.casal.getTelefoneDele());
+		//this.campoEndereco.setText(casal.getEndereço());
+	}
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 	}
@@ -83,11 +82,10 @@ public class CadastroCasaisController implements Initializable {
 		String VARcampoNomeDele = campoNomeDele.getText();
 		String VARcampoTelefoneDela = campoTelefoneDela.getText();
 		String VARcampoTelefoneDele = campoTelefoneDele.getText();
-                String VARcampoBairro = campoBairro.getText();
-                String VARcampoCEP = campoCEP.getText();
+		String VARcampoEndereco = campoEndereco.getText();
 
 		if (VARcampoApelido.isEmpty() | VARcampoNomeDela.isEmpty() | VARcampoNomeDele.isEmpty()
-				| VARcampoTelefoneDela.isEmpty() | VARcampoTelefoneDele.isEmpty() | VARcampoBairro.isEmpty() | VARcampoCEP.isEmpty()) {
+				| VARcampoTelefoneDela.isEmpty() | VARcampoTelefoneDele.isEmpty() | VARcampoEndereco.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Preencha todos os campos");
 			alert.setHeaderText("É necessário preencher todos os campos!");
@@ -102,17 +100,19 @@ public class CadastroCasaisController implements Initializable {
 				BaseDAO baseDAO = new BaseDAO();
 				CasalDAO casalDAO = new CasalDAOImp(baseDAO);
 
-				Casal casal = new Casal();
+				if(this.casal==null)
+				{
+					this.casal = new Casal();
+				}
+				
 				casal.setApelidoDoCasal(VARcampoApelido);
 				casal.setNomeDela(VARcampoNomeDela);
 				casal.setNomeDele(VARcampoNomeDele);
 				casal.setTelefoneDela(VARcampoTelefoneDela);
 				casal.setTelefoneDele(VARcampoTelefoneDele);
-                                /*casal.setEndereco(VARcampoEndereco); ESSA LINHA VAI MORRER PQ NAO EXISTE MAIS ESSE CAMPO
-                                AS SEGUINTES LINHAS SAO ADICIONADAS E VOCE TEM QUE CRIAR OS CAMPOS PRA ELAS NO BANCO
-                                casal.setBairro(VARcampoBairro);
-                                casal.setCEP(VARcampoCEP);*/
-				casalDAO.create(casal);
+				//casal.setEndereço(VARcampoEndereco);
+
+				casalDAO.createOrUpdate(casal);
 
 				baseDAO.getConnection().close();
 			} catch (SQLException e) {
@@ -127,7 +127,7 @@ public class CadastroCasaisController implements Initializable {
 				});
 			}
 		}
-		limpaCampos();
+		retornarMenu(event);
 	}
 
 	public void retornarMenu(ActionEvent event) throws IOException {
@@ -138,23 +138,4 @@ public class CadastroCasaisController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-        public void limpaCampos(){
-            campoApelido.setText("");
-            campoNomeDela.setText("");
-            campoNomeDele.setText("");
-            campoTelefoneDela.setText("");
-            campoTelefoneDele.setText("");
-            campoBairro.setText("");
-            campoCEP.setText("");
-        }
-        public void goSelecionarImagem(ActionEvent event) throws IOException{
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("Image Files","*.png","*.jpg","*.jpeg"));
-        File file = fileChooser.showOpenDialog(null);
-        if (file!=null){
-            Image image = new Image(file.toURI().toString());
-            campoImagem.setImage(image);
-        }
-    }
 }

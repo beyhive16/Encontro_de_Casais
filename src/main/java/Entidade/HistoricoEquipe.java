@@ -20,6 +20,15 @@ public class HistoricoEquipe {
 	@DatabaseField(columnName = "ID_CASAL", canBeNull = false,foreign = true)
 	private Casal casal;
 	
+	public HistoricoEquipe(){};
+	
+	public HistoricoEquipe(String[] strings) {
+		setId(new Integer(strings[0]));
+		setEquipe(new Equipe(new Integer(strings[1])));
+		setEncontro(new Encontro(new Integer(strings[2])));
+		setCasal(new Casal(new Integer(strings[3])));
+	}
+
 	public Equipe getEquipe() {
 		return equipe;
 	}

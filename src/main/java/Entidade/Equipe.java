@@ -15,6 +15,13 @@ public class Equipe {
 	@DatabaseField(columnName = "ID_TIPO_EQUIPE", canBeNull = false, foreign = true)
 	private TipoEquipe tipoEquipe;
 
+	public Equipe(){};
+	
+	public Equipe(Integer id)
+	{
+		setId(id);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

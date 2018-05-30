@@ -7,10 +7,17 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Dao.BaseDAO;
+import Dao.EncontroDAO;
+import Dao.EncontroDAOImp;
+import Dao.OrientadorEspiritualDAO;
+import Dao.OrientadorEspiritualDAOImp;
+import Entidade.Encontro;
 import Entidade.OrientadorEspiritual;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +27,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,6 +53,8 @@ public class SelecionarPadreController implements Initializable {
     
     @FXML
     private TableColumn<OrientadorEspiritual, Boolean> nome;
+    
+    private Encontro encontro = new Encontro();
     
     @SuppressWarnings("restriction")
 	@Override
@@ -70,11 +81,24 @@ public class SelecionarPadreController implements Initializable {
         
     }    
     private ObservableList<OrientadorEspiritual> PadreSelecionado() {
-        return FXCollections.observableArrayList(
-                new OrientadorEspiritual("João"),
-                new OrientadorEspiritual("José"),
-                new OrientadorEspiritual("Jacó")
-        );
+        List<OrientadorEspiritual> orientadorEspirituals = new ArrayList<>();
+    	try {
+			BaseDAO baseDAO = new BaseDAO();
+			OrientadorEspiritualDAO orientadorEspiritualDAO = new OrientadorEspiritualDAOImp(baseDAO);
+			orientadorEspirituals = orientadorEspiritualDAO.getAll();
+			baseDAO.getConnection().close();
+    	} catch (SQLException | IOException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Ocorreu um erro ao tentar salvar!");
+			alert.setHeaderText("Foi impossivel salvar no banco de dados!");
+			alert.setContentText(e.toString());
+			alert.showAndWait().ifPresent(rs -> {
+				if (rs == ButtonType.OK) {
+					System.out.println("Pressed OK.");
+				}
+			});
+		}
+    	return FXCollections.observableArrayList(orientadorEspirituals);
     }
     
     public void goEnviarPadreSelecionado(ActionEvent event) throws IOException{
@@ -83,8 +107,23 @@ public class SelecionarPadreController implements Initializable {
         for(OrientadorEspiritual p : var) {
         	if(p.getSelected()) {
         		System.out.println(p.getNome());
-        		//vai pegar o padre P que voltou, trazer ele pra tela anterior e adicionar ao campo 
-        		//vai receber o ultimo padre clicado
+        		try {
+					BaseDAO baseDAO = new BaseDAO();
+					EncontroDAO encontroDAO = new EncontroDAOImp(baseDAO);
+					this.encontro.setOrientadorEspiritual(p);
+					encontroDAO.createOrUpdate(encontro);
+					baseDAO.getConnection().close();
+        		} catch (SQLException | IOException e) {
+        			Alert alert = new Alert(AlertType.ERROR);
+        			alert.setTitle("Ocorreu um erro ao consultar o banco!");
+        			alert.setHeaderText(e.getMessage());
+        			alert.showAndWait().ifPresent(rs -> {
+        				if (rs == ButtonType.OK) {
+        					System.out.println("Pressed OK.");
+        				}
+        			});
+        		}
+            	
         	}
         }
         for (OrientadorEspiritual p: tabelaPadres.getSelectionModel().getSelectedItems()) {
@@ -95,12 +134,20 @@ public class SelecionarPadreController implements Initializable {
     
     public void retornarRegistro(ActionEvent event) throws IOException{
         System.out.println("Retornando ao Menu Principal");
-        Parent next = FXMLLoader.load(getClass().getResource("/Views/RegistrarEncontro.fxml"));
-        Scene scene = new Scene(next);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/RegistrarEncontro.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        RegistrarEncontroController registrarEncontroController = fxmlLoader.<RegistrarEncontroController>getController();
+        registrarEncontroController.fromPadre(encontro);
         stage.setScene(scene);
         stage.show();
     }
+	public Encontro getEncontro() {
+		return encontro;
+	}
+	public void setEncontro(Encontro encontro) {
+		this.encontro = encontro;
+	}
     
     
 }

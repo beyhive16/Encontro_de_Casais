@@ -17,4 +17,5 @@ public interface CasalDAO extends Dao<Casal, Integer>
 	boolean creating(List<Casal> casais);
 	
 	Casal getCasal(Casal casal) throws SQLException;
+	Casal getCasalForApelido(String apelido) throws SQLException;
 }

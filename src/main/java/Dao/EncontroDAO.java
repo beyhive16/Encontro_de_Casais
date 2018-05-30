@@ -11,4 +11,5 @@ public interface EncontroDAO extends Dao<Encontro, Integer>
 {
 	public List<Encontro> getAll() throws SQLException;
 	public String[][] getAllWithCoordAndOri() throws SQLException;
+	public List<String> getAnos() throws SQLException;
 }
