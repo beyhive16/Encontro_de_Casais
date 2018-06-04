@@ -83,6 +83,8 @@ public class CadastroAdmController implements Initializable {
         String VARcampoTelefone = campoTelefone.getText();
         String VARcampoEndereco = campoEndereco.getText();
         
+        //PEGAR ENDEREÇOS
+        
         if(VARcampoApelido.isEmpty()|VARcampoEndereco.isEmpty()|VARcampoTelefone.isEmpty()|VARcampoSenha.isEmpty()|VARcampoConfirmarSenha.isEmpty())
         {
         	Alert alert = new Alert(AlertType.WARNING);

@@ -6,20 +6,23 @@
 package Controller;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import Dao.BaseDAO;
 import Dao.CasalDAO;
 import Dao.CasalDAOImp;
+import Dao.EnderecoDAO;
+import Dao.EnderecoDAOImp;
 import Entidade.Casal;
+import Entidade.Endereco;
+import Util.ImageTools;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -106,16 +109,27 @@ public class CadastroCasaisController implements Initializable {
 	public void goCadastrarCasais(ActionEvent event) throws IOException {
 		// System.out.println("goCadastrarCasais");
 
+		//CAMPOS BASES
 		String VARcampoApelido = campoApelido.getText();
 		String VARcampoNomeDela = campoNomeDela.getText();
 		String VARcampoNomeDele = campoNomeDele.getText();
 		String VARcampoTelefoneDela = campoTelefoneDela.getText();
 		String VARcampoTelefoneDele = campoTelefoneDele.getText();
-
 		
+		byte[] VARImagem = ImageTools.toByteArray(campoImagem);
+		
+		//CAMPOS ENDEREÇOS
+		String VARcampoRua = campoRua.getText();
+		String VARcampoNumero = campoNumero.getText();
+		String VARcampoBairro = campoBairro.getText();
+		String VARcampoCidade = campoCidade.getText();
+		String VARcampoComplemento = campoComplemento.getText();
+		String VARcampoCEP = campoCEP.getText();
 		
 		if (VARcampoApelido.isEmpty() | VARcampoNomeDela.isEmpty() | VARcampoNomeDele.isEmpty()
-				| VARcampoTelefoneDela.isEmpty() | VARcampoTelefoneDele.isEmpty()) {
+				| VARcampoTelefoneDela.isEmpty() | VARcampoTelefoneDele.isEmpty() | VARcampoRua.isEmpty()
+				| VARcampoNumero.isEmpty()| VARcampoBairro.isEmpty() | VARcampoCidade.isEmpty()
+				| VARcampoCEP.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Preencha todos os campos");
 			alert.setHeaderText("É necessário preencher todos os campos!");
@@ -129,6 +143,7 @@ public class CadastroCasaisController implements Initializable {
 			try {
 				BaseDAO baseDAO = new BaseDAO();
 				CasalDAO casalDAO = new CasalDAOImp(baseDAO);
+				EnderecoDAO enderecoDAO = new EnderecoDAOImp(baseDAO);
 
 				if (this.casal == null) {
 					this.casal = new Casal();
@@ -139,7 +154,19 @@ public class CadastroCasaisController implements Initializable {
 				casal.setNomeDele(VARcampoNomeDele);
 				casal.setTelefoneDela(VARcampoTelefoneDela);
 				casal.setTelefoneDele(VARcampoTelefoneDele);
-				// casal.setEndereço(VARcampoEndereco);
+				
+				Endereco endereco = new Endereco();
+				endereco.setBairro(VARcampoBairro);
+				endereco.setCep(VARcampoCEP);
+				endereco.setCidade(VARcampoCidade);
+				endereco.setComplemento(VARcampoComplemento);
+				endereco.setnCasa(VARcampoNumero);
+				endereco.setRua(VARcampoRua);
+				
+				Endereco endereco2 = enderecoDAO.createIfNotExists(endereco);
+				
+				casal.setFoto(VARImagem);
+				casal.setEndereco(endereco2);
 
 				casalDAO.createOrUpdate(casal);
 
