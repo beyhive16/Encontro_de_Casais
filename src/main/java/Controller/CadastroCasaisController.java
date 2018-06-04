@@ -95,6 +95,7 @@ public class CadastroCasaisController implements Initializable {
 		this.campoNomeDele.setText(this.casal.getNomeDele());
 		this.campoTelefoneDela.setText(this.casal.getTelefoneDela());
 		this.campoTelefoneDele.setText(this.casal.getTelefoneDele());
+		
 		// this.campoEndereco.setText(casal.getEndereço());
 	}
 
@@ -111,6 +112,8 @@ public class CadastroCasaisController implements Initializable {
 		String VARcampoTelefoneDela = campoTelefoneDela.getText();
 		String VARcampoTelefoneDele = campoTelefoneDele.getText();
 
+		
+		
 		if (VARcampoApelido.isEmpty() | VARcampoNomeDela.isEmpty() | VARcampoNomeDele.isEmpty()
 				| VARcampoTelefoneDela.isEmpty() | VARcampoTelefoneDele.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
