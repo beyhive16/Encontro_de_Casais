@@ -183,7 +183,8 @@ public class CadastroCasaisController implements Initializable {
 				});
 			}
 		}
-		retornarMenu(event);
+		//retornarMenu(event);
+		this.limpaCampos();
 	}
 
 	public void retornarMenu(ActionEvent event) throws IOException {
