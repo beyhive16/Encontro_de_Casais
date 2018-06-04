@@ -50,7 +50,7 @@ public class SelecaoDestinoCadastroController implements Initializable {
     }
     
     public void goCasal(ActionEvent event) throws IOException{
-        System.out.println("goCasal");
+        //System.out.println("goCasal");
         Parent next = FXMLLoader.load(getClass().getResource("/Views/CadastroCasais.fxml"));
         Scene scene = new Scene(next);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
