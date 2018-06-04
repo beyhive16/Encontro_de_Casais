@@ -81,36 +81,6 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="ButtonCadastrarCasais" layoutX="522.0" layoutY="532.0" mnemonicParsing="false" onAction="#goCadastrarCasais" text="Cadastrar">
-         <font>
-            <Font name="Gentium Basic Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarMenu" text="VOLTAR">
-         <font>
-            <Font name="Gentium Basic Bold" size="12.0" />
-         </font>
-      </Button>
-      <VBox layoutX="35.0" layoutY="518.0" prefHeight="62.0" prefWidth="429.0">
-         <children>
-            <Label style="-fx-padding: 10;" text="CEP:">
-               <font>
-                  <Font name="Gentium Basic Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="campoCEP" prefHeight="25.0" prefWidth="197.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="14.0" layoutY="91.0" prefHeight="206.0" prefWidth="157.0" style="-fx-alignment: center;">
-         <children>
-            <ImageView fx:id="campoImagem" fitHeight="160.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../Imagens/user.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="ButtonSelecionarImagem" mnemonicParsing="false" onAction="#goSelecionarImagem" text="Selecionar Foto" />
-         </children>
-      </VBox>
       <VBox layoutX="37.0" layoutY="297.0">
          <children>
             <HBox prefHeight="62.0" prefWidth="590.0">
@@ -171,6 +141,36 @@
                   <TextField fx:id="campoComplemento" prefHeight="25.0" prefWidth="197.0" />
                </children>
             </VBox>
+         </children>
+      </VBox>
+      <VBox layoutX="35.0" layoutY="518.0" prefHeight="62.0" prefWidth="429.0">
+         <children>
+            <Label style="-fx-padding: 10;" text="CEP:">
+               <font>
+                  <Font name="Gentium Basic Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="campoCEP" prefHeight="25.0" prefWidth="197.0" />
+         </children>
+      </VBox>
+      <Button fx:id="ButtonCadastrarCasais" layoutX="522.0" layoutY="532.0" mnemonicParsing="false" onAction="#goCadastrarCasais" text="Cadastrar">
+         <font>
+            <Font name="Gentium Basic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#retornarMenu" text="VOLTAR">
+         <font>
+            <Font name="Gentium Basic Bold" size="12.0" />
+         </font>
+      </Button>
+      <VBox layoutX="14.0" layoutY="91.0" prefHeight="206.0" prefWidth="157.0" style="-fx-alignment: center;">
+         <children>
+            <ImageView fx:id="campoImagem" fitHeight="160.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Imagens/user.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="ButtonSelecionarImagem" mnemonicParsing="false" onAction="#goSelecionarImagem" text="Selecionar Foto" />
          </children>
       </VBox>
    </children>

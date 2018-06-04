@@ -121,7 +121,17 @@ public class CadastroAdmController implements Initializable {
         }
         retornarMenu(event);
     }
-    
+    public void goEscolherImagem(ActionEvent event) throws IOException {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters()
+				.addAll(new FileChooser.ExtensionFilter("Image Files", ".png", ".jpg", "*.jpeg"));
+		File file = fileChooser.showOpenDialog(null);
+		if (file != null) {
+			BufferedImage bufferedImage = ImageIO.read(file);
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			campoImagem.setImage(image);
+		}
+	}
     public void retornarMenu(ActionEvent event) throws IOException{
         System.out.println("Retornando ao Menu Principal");
         Parent next = FXMLLoader.load(getClass().getResource("/Views/MenuPrincipal.fxml"));
