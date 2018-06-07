@@ -5,15 +5,20 @@
  */
 package Controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
 import Dao.BaseDAO;
 import Dao.UsuarioDAO;
 import Dao.UsuarioDAOImp;
 import Entidade.Usuario;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +31,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -53,6 +61,9 @@ public class CadastroAdmController implements Initializable {
     
 	@FXML
 	TextArea campoEndereco;
+	
+	@FXML
+	ImageView campoImagem;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,6 +82,8 @@ public class CadastroAdmController implements Initializable {
         String VARcampoSenha = campoSenha.getText();
         String VARcampoTelefone = campoTelefone.getText();
         String VARcampoEndereco = campoEndereco.getText();
+        
+        //PEGAR ENDEREÇOS
         
         if(VARcampoApelido.isEmpty()|VARcampoEndereco.isEmpty()|VARcampoTelefone.isEmpty()|VARcampoSenha.isEmpty()|VARcampoConfirmarSenha.isEmpty())
         {
@@ -140,5 +153,15 @@ public class CadastroAdmController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+    public void goEscolherImagem(ActionEvent event) throws IOException {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters()
+				.addAll(new FileChooser.ExtensionFilter("Image Files", ".png", ".jpg", "*.jpeg"));
+		File file = fileChooser.showOpenDialog(null);
+		if (file != null) {
+			BufferedImage bufferedImage = ImageIO.read(file);
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			campoImagem.setImage(image);
+		}
+	}
 }
